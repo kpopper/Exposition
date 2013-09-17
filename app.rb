@@ -4,7 +4,7 @@ require 'haml'
 require 'data_mapper'
 require 'dm-migrations'
 
-DataMapper.setup(:default, 'sqlite:db/exposition_development.db')
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:db/exposition_development.db')
 
 class Person
   def self.people
@@ -48,9 +48,6 @@ private
 def exposition_for_today
   today = Date.today
   key = key_for_day today
-puts key
-  puts Exposition.get(key).inspect
-puts Exposition.all.inspect
 
   Exposition.get(key) ||
     Exposition.create!(date: today, day_key: key, person: Person.form_person, place: Place.random)
