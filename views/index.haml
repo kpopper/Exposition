@@ -1,17 +1,31 @@
-%h1 Exposition
+!!! 5
+%html
+  %head
+    %link{ href:'http://fonts.googleapis.com/css?family=Lobster', rel:'stylesheet', type:'text/css'}
+    %link{ href:'http://fonts.googleapis.com/css?family=Arvo:400,700', rel:'stylesheet', type:'text/css' }
+    :css
+      h1 {
+        font-family: 'Lobster', cursive;
+        font-size: 52px;
+      }
+      h3, p {
+        font-family: 'Arvo', serif;
+      }
+  %body
+    %h1 Exposition
 
-%h2 Write more with our daily inspiration.
+    %h2 Write more with our daily inspiration.
 
-%p Write a short story based on the character and setting below. Come back tomorrow for a new challenge.
+    %p Write a short story based on the character and setting below. Come back tomorrow for a new challenge.
 
-%p A character:
+    %p A character:
 
-%h3
-  = @exposition.person.capitalize
+    %h3
+      = @exposition.person.capitalize
 
-%p A setting:
+    %p A setting:
 
-%h3
-  = @exposition.place.capitalize
+    %h3
+      = @exposition.place.capitalize
 
-%p Sign in with Twitter or Facebook to post your story here.
+    %p Sign in with Twitter or Facebook to post your story here.
