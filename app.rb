@@ -44,6 +44,11 @@ get '/' do
   haml :index
 end
 
+post '/' do
+  @exposition = exposition_for_today
+  haml :index
+end
+
 private
 def exposition_for_today
   today = Date.today
