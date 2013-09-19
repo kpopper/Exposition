@@ -4,8 +4,17 @@ require 'haml'
 require 'data_mapper'
 require 'dm-migrations'
 require 'dotenv'
+require 'rack-flash'
+# require 'omniauth-twitter'
 
 Dotenv.load ".env.#{ENV['RACK_ENV']}"
+enable :sessions
+use Rack::Flash
+
+# use OmniAuth::Builder do
+#   provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+# end
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:db/exposition_development.db')
 
 class Person
@@ -74,7 +83,8 @@ end
 
 post '/' do
   @exposition = exposition_for_today
-  Entry.create params["entry"]
+  @entry = @exposition.entries.create params
+  flash[:notice] = "Your story has been stored. Come back tomorrow for more inspiration!"
   haml :index
 end
 

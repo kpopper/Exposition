@@ -5,8 +5,16 @@ h1 {
   line-height: 78px;
 }
 
-h2, h3, p {
+h2, h3, p, label, input, textarea {
   font-family: 'Arvo', serif;
+}
+
+label {
+  font-weight: normal;
+}
+
+textarea {
+  width: 100%
 }
 
 .row {
@@ -23,7 +31,6 @@ h2, h3, p {
 
 .heading {
   font-size: 20px;
-  width: 200px;
 }
 
 .changeable {

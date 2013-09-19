@@ -5,6 +5,7 @@ gem 'haml'
 gem 'thin'
 gem 'data_mapper'
 gem 'omniauth-twitter'
+gem 'rack-flash3'
 
 group :development, :test do
   gem 'shotgun'

@@ -1,20 +1,39 @@
 %h1 Exposition
 
-%h2.leading Write here, right now.
-%p A little bit of inspiration to get you into the habit of writing every day.
+- if flash[:notice]
+  %p
+    = flash[:notice]
+
+%h2.leading Get better at writing, with practice
+
+%p A little bit of inspiration to get you into the habit of writing every day. Simply write a short story inspired by the character and setting below. Then come back tomorrow and try again!
+%p If you want, you can also save your stories below for posterity.
 
 .today
   .row
-    %div.col-md-8
+    .col-md-8
       %p.heading
         A character:
       %p.changeable.col-md-offset-1
         = @exposition.person.capitalize
   .row
-    %div.col-md-8
+    .col-md-8
       %p.heading
         A setting:
       %p.changeable.col-md-offset-1
         = @exposition.place.capitalize
 
-%p Sign in with Twitter or Facebook to post your story here.
+/ %p Sign in with Twitter or Facebook to post your story here.
+
+%form{ action: "/", method: "post", name: "entry", role: "form" }
+  %fieldset
+    .form-group
+      .row
+        .col-md-8
+          %label{ for: "text", class: "heading" }
+            Enter today's short story:
+          %br
+          %textarea{ name: "text", class: "form-control col-md-offset-1" }
+      .row
+        .col-md-8
+          %input{ type: :submit, value: "Save your story", class: "form-control" }

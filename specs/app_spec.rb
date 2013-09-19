@@ -54,7 +54,7 @@ describe 'The HelloWorld App' do
   end
 
   context Entry do
-    it { belongs_to(Exposition) }
+    it { should belong_to :exposition }
   end
 
   context "actions" do
@@ -77,8 +77,13 @@ describe 'The HelloWorld App' do
 
       it "stores the text" do
         text = "This is some text"
-        post '/', { entry: { text: text } }
+        post '/', { text: text }
         expect(Entry.last.text).to eq(text)
+      end
+
+      it "attaches a new entry to today's exposition" do
+        post '/', {}
+        expect(Entry.last.exposition).to eq(Exposition.today)
       end
     end
   end
