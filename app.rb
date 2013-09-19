@@ -37,6 +37,8 @@ class Exposition
   property :person, String
   property :place, String
 
+  has n, :entries
+
   def self.today
     today = Date.today
     key = key_for_day today
@@ -53,6 +55,15 @@ class Exposition
   end
 end
 
+class Entry
+  include DataMapper::Resource
+
+  property :id, Serial, key: true
+  property :text, Text
+
+  belongs_to :exposition, required: false
+end
+
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
@@ -63,6 +74,7 @@ end
 
 post '/' do
   @exposition = exposition_for_today
+  Entry.create params["entry"]
   haml :index
 end
 

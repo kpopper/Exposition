@@ -4,10 +4,12 @@ require File.expand_path('../../app.rb', __FILE__)
 require 'rspec'
 require 'rack/test'
 require 'database_cleaner'
+require 'dm-rspec'
 
 DatabaseCleaner.strategy = :truncation
 
-Rspec.configure do |config|
+RSpec.configure do |config|
+  config.include(DataMapper::Matchers)
   config.after(:each) do
     DatabaseCleaner.clean
   end
@@ -70,8 +72,13 @@ describe 'The HelloWorld App' do
       end
 
       it "creates a new entry" do
-        post '/', {}
-        expect{Entry.count}.to change.from(0).to(1)
+        expect{ post '/', {} }.to change{Entry.count}.from(0).to(1)
+      end
+
+      it "stores the text" do
+        text = "This is some text"
+        post '/', { entry: { text: text } }
+        expect(Entry.last.text).to eq(text)
       end
     end
   end
