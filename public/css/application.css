@@ -2,6 +2,7 @@ h1 {
   color: #e44a20;
   font-family: 'Lobster', cursive;
   font-size: 52px;
+  line-height: 78px;
 }
 
 h2, h3, p {
@@ -10,6 +11,10 @@ h2, h3, p {
 
 .row {
   margin-bottom: 20px;
+}
+
+.leading {
+  margin: 20px 0;
 }
 
 .today {

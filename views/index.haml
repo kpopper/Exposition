@@ -1,20 +1,20 @@
 %h1 Exposition
 
-%h2 Write here, right now. 
+%h2.leading Write here, right now.
 %p A little bit of inspiration to get you into the habit of writing every day.
 
 .today
   .row
-    %div.col-md-8.col-md-offset-1
+    %div.col-md-8
       %p.heading
         A character:
-      %p.changeable
+      %p.changeable.col-md-offset-1
         = @exposition.person.capitalize
   .row
-    %div.col-md-8.col-md-offset-1
+    %div.col-md-8
       %p.heading
         A setting:
-      %p.changeable
+      %p.changeable.col-md-offset-1
         = @exposition.place.capitalize
 
 %p Sign in with Twitter or Facebook to post your story here.
