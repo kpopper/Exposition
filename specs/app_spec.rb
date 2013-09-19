@@ -20,11 +20,6 @@ describe 'The HelloWorld App' do
     Sinatra::Application
   end
 
-  it "says hello" do
-    get '/'
-    expect(last_response).to be_ok
-  end
-
   context Person do
     it "picks an adjective and a person" do
       person = Person.form_person
@@ -53,6 +48,31 @@ describe 'The HelloWorld App' do
     it "returns the existing exposition if there is one for today" do
       exp = Exposition.create!(day_key: Exposition.key_for_day(Date.today))
       expect(Exposition.today).to eq(exp)
+    end
+  end
+
+  context Entry do
+    it { belongs_to(Exposition) }
+  end
+
+  context "actions" do
+    describe "#get 'home'" do
+      it "loads the homepage" do
+        get '/'
+        expect(last_response).to be_ok
+      end
+    end
+
+    describe "#post 'new'" do
+      it "loads correctly" do
+        post '/', {}
+        expect(last_response).to be_ok
+      end
+
+      it "creates a new entry" do
+        post '/', {}
+        expect{Entry.count}.to change.from(0).to(1)
+      end
     end
   end
 end

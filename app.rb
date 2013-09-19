@@ -13,7 +13,7 @@ class Person
     %w(man woman person child)
   end
   def self.adjectives
-   %w(old young jewish disabled American)
+    %w(old young jewish disabled American)
   end
   def self.form_person
     self.adjectives.sample + " " + self.people.sample
@@ -61,3 +61,20 @@ get '/' do
   haml :index
 end
 
+post '/' do
+  @exposition = exposition_for_today
+  haml :index
+end
+
+private
+def exposition_for_today
+  today = Date.today
+  key = key_for_day today
+
+  Exposition.get(key) ||
+    Exposition.create!(date: today, day_key: key, person: Person.form_person, place: Place.random)
+end
+def key_for_day(day)
+  seconds_in_a_day = 60 * 60 * 24
+  (day.to_time.to_i / seconds_in_a_day).to_i
+end
